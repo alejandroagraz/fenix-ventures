@@ -3,7 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export function setupSwagger(app: INestApplication): void {
   const options = new DocumentBuilder()
-    .setTitle('KidClass API')
+    .setTitle('Fenix-Ventures API')
     .setDescription('Detailed API documentation, for the Fenix-Ventures')
     .setVersion('1.0')
     .addBearerAuth(
