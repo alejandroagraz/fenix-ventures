@@ -38,7 +38,7 @@ import { ThrottlerGuard } from '@nestjs/throttler';
 @Controller('tasks')
 @UseGuards(ThrottlerGuard)
 export class TasksController {
-  constructor(private readonly _booksService: TasksService) {}
+  constructor(private readonly _tasksService: TasksService) {}
 
   @Get()
   @UseGuards(JwtAuthGuard)
@@ -49,7 +49,7 @@ export class TasksController {
   async getAll(
     @Query() pageOptionsDto: PageOptionsDto,
   ): Promise<PageDto<TaskDto>> {
-    return await this._booksService.getAll(pageOptionsDto);
+    return await this._tasksService.getAll(pageOptionsDto);
   }
 
   @Get(':id')
@@ -69,7 +69,7 @@ export class TasksController {
     type: [DetailTaskDto],
   })
   async getDetail(@Param('id') id: string): Promise<DetailTaskDto> {
-    return await this._booksService.getDetail(id);
+    return await this._tasksService.getDetail(id);
   }
 
   @Post()
@@ -84,7 +84,7 @@ export class TasksController {
   @ApiUnauthorizedResponse({ status: 401, description: 'Unauthorized' })
   @ApiBadGatewayResponse({ status: 502, description: 'Something happened' })
   async create(@Body() newTask: CreateTaskInput): Promise<TaskDto> {
-    return await this._booksService.create(newTask);
+    return await this._tasksService.create(newTask);
   }
 
   @Put(':id')
@@ -108,7 +108,7 @@ export class TasksController {
     @Param('id') id: string,
     @Body() updateTask: UpdateTaskInput,
   ): Promise<TaskDto> {
-    return await this._booksService.update(id, updateTask);
+    return await this._tasksService.update(id, updateTask);
   }
 
   @Delete(':id')
@@ -124,6 +124,6 @@ export class TasksController {
   @ApiUnauthorizedResponse({ status: 401, description: 'Unauthorized' })
   @ApiBadGatewayResponse({ status: 502, description: 'Something happened' })
   async deleteOneByID(@Param('id') id: string) {
-    return await this._booksService.deleteOneByID(id);
+    return await this._tasksService.deleteOneByID(id);
   }
 }
