@@ -1,0 +1,8 @@
+projects/backend/dist/
+projects/backend/node_modules/
+project/backend/src/auths/certs
+projects/src/database/migrations
+.idea/
+projects/backend/.env
+projects/backend/yarn.lock
+.env

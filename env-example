@@ -1,0 +1,3 @@
+PROJECT_NAME=fenix-ventures
+JOB_BASE_NAME=develop
+PORT_LOCAL=3000

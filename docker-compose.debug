@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  api-server:
+    build:
+      context: ./projects/backend
+      dockerfile: Dockerfile
+    env_file: .env
+    container_name: api-${PROJECT_NAME}-${JOB_BASE_NAME}
+    image: server/${PROJECT_NAME}
+    ports:
+      - "${PORT_LOCAL}:${PORT_LOCAL}"
+    volumes:
+      - ./projects/backend:/app
+      - /app/node_modules
+      - /app/src/auths/certs
