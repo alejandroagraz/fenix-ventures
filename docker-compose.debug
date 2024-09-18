@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  api-server:
+    build:
+      context: ./projects/backend
+      dockerfile: Dockerfile
+    env_file: .env
+    container_name: api-${PROJECT_NAME}-${JOB_BASE_NAME}
+    image: server/${PROJECT_NAME}
+    ports:
+      - "${PORT_LOCAL}:${PORT_LOCAL}"
+    volumes:
+      - ./projects/backend:/app
+      - /app/node_modules
+      - /app/src/auths/certs
+
+  generate-migrate-db:
+    build:
+      context: ./projects/backend
+      dockerfile: Dockerfile
+    depends_on:
+      - api-server
+    command:
+      - yarn run typeorm:generate-migration
+      - yarn run typeorm:run-migrations
+
+  generate-seed:
+    build:
+      context: ./projects/backend
+      dockerfile: Dockerfile
+    depends_on:
+      - api-server
+      - generate-migrate-db
+    command:
+      - yarn run seed
